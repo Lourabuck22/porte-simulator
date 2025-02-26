@@ -264,10 +264,73 @@ section h2 {
   margin-top: 10px;
 }
 
+/* Nouveau : IA et contrôles 3D */
+.ai-assistance {
+  display: flex;
+  justify-content: center;
+  margin-top: 15px;
+}
+
+.ai-assistance button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--accent-color);
+}
+
+.ai-assistance button i {
+  margin-right: 8px;
+}
+
 .action-buttons {
   display: flex;
   justify-content: space-between;
   margin-top: 20px;
+}
+
+/* Style pour la boîte de suggestions IA */
+.ai-suggestions {
+  background-color: var(--white);
+  border: 1px solid var(--primary-color);
+  border-radius: var(--border-radius);
+  padding: 15px;
+  margin-top: 10px;
+  box-shadow: var(--box-shadow);
+}
+
+.ai-suggestions h4 {
+  color: var(--primary-color);
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.ai-suggestions h4 i {
+  margin-right: 8px;
+}
+
+.suggestion-item {
+  background-color: var(--light-gray);
+  padding: 8px 12px;
+  border-radius: var(--border-radius);
+  margin-bottom: 8px;
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.suggestion-item:hover {
+  background-color: rgba(74, 144, 226, 0.1);
+}
+
+.suggestion-item .confidence {
+  font-size: 0.8rem;
+  color: var(--dark-gray);
+  background-color: var(--white);
+  padding: 2px 6px;
+  border-radius: 10px;
 }
 
 /* Personnalisation */
@@ -388,6 +451,28 @@ section h2 {
   width: 80%;
   max-width: 500px;
   position: relative;
+}
+
+/* Modal 3D spécifique */
+.modal-3d {
+  max-width: 800px;
+  width: 90%;
+  margin: 5% auto;
+}
+
+#3d-container {
+  width: 100%;
+  height: 500px;
+  background-color: var(--light-gray);
+  border-radius: var(--border-radius);
+  margin-bottom: 15px;
+  position: relative;
+}
+
+.modal-controls {
+  display: flex;
+  justify-content: center;
+  margin-top: 15px;
 }
 
 .close-modal {
