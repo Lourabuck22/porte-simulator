@@ -5,6 +5,9 @@ const fs = require('fs');
 const cors = require('cors');
 const helmet = require('helmet');
 
+// Middleware d'authentification
+const basicAuth = require('./middleware/auth');
+
 // Routes
 const apiRoutes = require('./routes/api');
 const adminRoutes = require('./routes/admin');
@@ -44,10 +47,10 @@ app.use(express.static('public'));
 
 // Définition des routes
 app.use('/api', apiRoutes);
-app.use('/admin', adminRoutes);
 
-// Route pour la page d'admin
-app.get('/admin', (req, res) => {
+// Application du middleware d'authentification sur les routes d'admin
+app.use('/admin', basicAuth, adminRoutes);
+app.get('/admin', basicAuth, (req, res) => {
   res.sendFile(path.join(__dirname, 'views', 'admin.html'));
 });
 
@@ -61,4 +64,5 @@ app.listen(PORT, () => {
   console.log(`Serveur démarré sur le port ${PORT}`);
   console.log(`Application accessible à l'adresse: http://localhost:${PORT}`);
   console.log(`Interface d'administration: http://localhost:${PORT}/admin`);
+  console.log(`Identifiants par défaut pour l'administration: admin / porte123`);
 });
