@@ -76,11 +76,19 @@
               <button id="size-increase" class="btn btn-icon"><i class="fas fa-plus"></i></button>
               <button id="size-decrease" class="btn btn-icon"><i class="fas fa-minus"></i></button>
             </div>
+            <!-- Nouveau bouton pour l'assistance par IA -->
+            <div class="ai-assistance">
+              <button id="ai-detect-door" class="btn btn-secondary">
+                <i class="fas fa-robot"></i> Positionnement IA
+              </button>
+            </div>
           </div>
         </div>
         <div class="action-buttons">
           <button id="save-project" class="btn btn-primary" disabled><i class="fas fa-save"></i> Sauvegarder</button>
           <button id="export-image" class="btn btn-primary" disabled><i class="fas fa-download"></i> Exporter</button>
+          <!-- Nouveau bouton pour la vue 3D -->
+          <button id="view-3d" class="btn btn-primary" disabled><i class="fas fa-cube"></i> Vue 3D</button>
         </div>
       </div>
 
@@ -135,6 +143,21 @@
     </div>
   </div>
 
+  <!-- Modal 3D -->
+  <div class="modal" id="view-3d-modal">
+    <div class="modal-content modal-3d">
+      <span class="close-modal">&times;</span>
+      <h2>Visualisation 3D</h2>
+      <div id="3d-container"></div>
+      <div class="modal-controls">
+        <button id="rotate-left" class="btn btn-icon"><i class="fas fa-undo"></i></button>
+        <button id="rotate-right" class="btn btn-icon"><i class="fas fa-redo"></i></button>
+        <button id="zoom-in" class="btn btn-icon"><i class="fas fa-search-plus"></i></button>
+        <button id="zoom-out" class="btn btn-icon"><i class="fas fa-search-minus"></i></button>
+      </div>
+    </div>
+  </div>
+
   <!-- Service Worker -->
   <script>
     if ('serviceWorker' in navigator) {
@@ -152,5 +175,7 @@
   <script src="/js/main.js"></script>
   <script src="/js/upload.js"></script>
   <script src="/js/doorCustomizer.js"></script>
+  <script src="/js/ai-detector.js"></script>
+  <script src="/js/3d-viewer.js"></script>
 </body>
 </html>
