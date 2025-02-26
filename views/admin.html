@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Administration - Simulateur de Portes</title>
+  <meta name="description" content="Interface d'administration pour le simulateur de portes">
+  
+  <!-- CSS -->
+  <link rel="stylesheet" href="/css/style.css">
+  
+  <!-- Font Awesome pour les icônes -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="admin-page">
+  <header>
+    <div class="container">
+      <h1><i class="fas fa-cog"></i> Administration - Simulateur de Portes</h1>
+      <p>Gérez le contenu de votre application</p>
+      <a href="/" class="btn btn-secondary"><i class="fas fa-home"></i> Retour à l'application</a>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="admin-container">
+      <!-- Navigation admin -->
+      <div class="admin-nav">
+        <ul>
+          <li><a href="#doors" class="active" data-section="doors-section"><i class="fas fa-door-open"></i> Portes</a></li>
+          <li><a href="#colors" data-section="colors-section"><i class="fas fa-palette"></i> Couleurs</a></li>
+          <li><a href="#handles" data-section="handles-section"><i class="fas fa-hand-point-up"></i> Poignées</a></li>
+          <li><a href="#patterns" data-section="patterns-section"><i class="fas fa-th"></i> Motifs</a></li>
+          <li><a href="#projects" data-section="projects-section"><i class="fas fa-project-diagram"></i> Projets</a></li>
+        </ul>
+      </div>
+
+      <!-- Contenu admin -->
+      <div class="admin-content">
+        <!-- Section Portes -->
+        <div id="doors-section" class="admin-section active">
+          <h2>Gestion des portes</h2>
+          
+          <div class="add-form">
+            <h3>Ajouter une nouvelle porte</h3>
+            <form id="add-door-form">
+              <div class="form-group">
+                <label for="door-name">Nom:</label>
+                <input type="text" id="door-name" required>
+              </div>
+              <div class="form-group">
+                <label for="door-description">Description:</label>
+                <textarea id="door-description"></textarea>
+              </div>
+              <div class="form-group">
+                <label for="door-image">Image (PNG avec fond transparent recommandé):</label>
+                <input type="file" id="door-image" accept="image/*" required>
+              </div>
+              <button type="submit" class="btn btn-primary">Ajouter la porte</button>
+            </form>
+          </div>
+          
+          <div class="items-list" id="doors-list">
+            <h3>Portes disponibles</h3>
+            <div class="loading">Chargement des portes...</div>
+            <!-- Les portes seront ajoutées ici dynamiquement -->
+          </div>
+        </div>
+
+        <!-- Section Couleurs -->
+        <div id="colors-section" class="admin-section">
+          <h2>Gestion des couleurs</h2>
+          
+          <div class="add-form">
+            <h3>Ajouter une nouvelle couleur</h3>
+            <form id="add-color-form">
+              <div class="form-group">
+                <label for="color-name">Nom:</label>
+                <input type="text" id="color-name" required>
+              </div>
+              <div class="form-group">
+                <label for="color-code">Code couleur:</label>
+                <input type="color" id="color-code" required>
+              </div>
+              <button type="submit" class="btn btn-primary">Ajouter la couleur</button>
+            </form>
+          </div>
+          
+          <div class="items-list" id="colors-list">
+            <h3>Couleurs disponibles</h3>
+            <div class="loading">Chargement des couleurs...</div>
+            <!-- Les couleurs seront ajoutées ici dynamiquement -->
+          </div>
+        </div>
+
+        <!-- Section Poignées -->
+        <div id="handles-section" class="admin-section">
+          <h2>Gestion des poignées</h2>
+          
+          <div class="add-form">
+            <h3>Ajouter une nouvelle poignée</h3>
+            <form id="add-handle-form">
+              <div class="form-group">
+                <label for="handle-name">Nom:</label>
+                <input type="text" id="handle-name" required>
+              </div>
+              <div class="form-group">
+                <label for="handle-image">Image (PNG avec fond transparent recommandé):</label>
+                <input type="file" id="handle-image" accept="image/*" required>
+              </div>
+              <button type="submit" class="btn btn-primary">Ajouter la poignée</button>
+            </form>
+          </div>
+          
+          <div class="items-list" id="handles-list">
+            <h3>Poignées disponibles</h3>
+            <div class="loading">Chargement des poignées...</div>
+            <!-- Les poignées seront ajoutées ici dynamiquement -->
+          </div>
+        </div>
+
+        <!-- Section Motifs -->
+        <div id="patterns-section" class="admin-section">
+          <h2>Gestion des motifs/vitrages</h2>
+          
+          <div class="add-form">
+            <h3>Ajouter un nouveau motif</h3>
+            <form id="add-pattern-form">
+              <div class="form-group">
+                <label for="pattern-name">Nom:</label>
+                <input type="text" id="pattern-name" required>
+              </div>
+              <div class="form-group">
+                <label for="pattern-image">Image (PNG avec fond transparent recommandé):</label>
+                <input type="file" id="pattern-image" accept="image/*" required>
+              </div>
+              <button type="submit" class="btn btn-primary">Ajouter le motif</button>
+            </form>
+          </div>
+          
+          <div class="items-list" id="patterns-list">
+            <h3>Motifs disponibles</h3>
+            <div class="loading">Chargement des motifs...</div>
+            <!-- Les motifs seront ajoutés ici dynamiquement -->
+          </div>
+        </div>
+
+        <!-- Section Projets -->
+        <div id="projects-section" class="admin-section">
+          <h2>Gestion des projets</h2>
+          
+          <div class="items-list" id="projects-list">
+            <h3>Projets sauvegardés</h3>
+            <div class="loading">Chargement des projets...</div>
+            <!-- Les projets seront ajoutés ici dynamiquement -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Scripts -->
+  <script src="/js/admin.js"></script>
+</body>
+</html>
