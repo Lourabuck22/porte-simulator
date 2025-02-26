@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simulateur de Portes</title>
+  <meta name="description" content="Simulateur de portes sur façades - Visualisez différentes portes sur votre façade">
+  
+  <!-- PWA Meta Tags -->
+  <meta name="theme-color" content="#4a90e2">
+  <link rel="manifest" href="/manifest.json">
+  <link rel="apple-touch-icon" href="/img/icon-192.png">
+  
+  <!-- CSS -->
+  <link rel="stylesheet" href="/css/style.css">
+  
+  <!-- Font Awesome pour les icônes -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1><i class="fas fa-door-open"></i> Simulateur de Portes</h1>
+      <p>Visualisez différentes portes sur votre façade et personnalisez-les</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="app-container">
+      <!-- Panneau de gauche: Upload et sélection -->
+      <div class="panel left-panel">
+        <section class="section-upload">
+          <h2>1. Chargez votre façade</h2>
+          <div class="upload-container" id="facade-upload-container">
+            <div class="upload-area" id="upload-area">
+              <i class="fas fa-cloud-upload-alt"></i>
+              <p>Glissez une image ici ou</p>
+              <label for="facade-upload" class="btn">Parcourir</label>
+              <input type="file" id="facade-upload" accept="image/*" hidden>
+            </div>
+          </div>
+          <div class="address-search">
+            <p>Ou entrez une adresse:</p>
+            <div class="input-group">
+              <input type="text" id="address-input" placeholder="123 rue exemple, ville">
+              <button id="search-address" class="btn btn-secondary">Rechercher</button>
+            </div>
+          </div>
+        </section>
+
+        <section class="section-doors">
+          <h2>2. Choisissez une porte</h2>
+          <div class="doors-grid" id="doors-grid">
+            <!-- Les portes seront ajoutées ici dynamiquement -->
+            <div class="loading">Chargement des portes...</div>
+          </div>
+        </section>
+      </div>
+
+      <!-- Panneau central: Visualisation -->
+      <div class="panel center-panel">
+        <div class="visualization-container">
+          <div class="visualization" id="visualization">
+            <div class="placeholder-message">
+              <i class="fas fa-home"></i>
+              <p>Chargez une façade et sélectionnez une porte pour commencer</p>
+            </div>
+          </div>
+          <div class="door-positioning" id="door-positioning" style="display: none;">
+            <p>Positionnez la porte sur votre façade:</p>
+            <div class="position-controls">
+              <button id="position-left" class="btn btn-icon"><i class="fas fa-arrow-left"></i></button>
+              <button id="position-right" class="btn btn-icon"><i class="fas fa-arrow-right"></i></button>
+              <button id="position-up" class="btn btn-icon"><i class="fas fa-arrow-up"></i></button>
+              <button id="position-down" class="btn btn-icon"><i class="fas fa-arrow-down"></i></button>
+              <button id="size-increase" class="btn btn-icon"><i class="fas fa-plus"></i></button>
+              <button id="size-decrease" class="btn btn-icon"><i class="fas fa-minus"></i></button>
+            </div>
+          </div>
+        </div>
+        <div class="action-buttons">
+          <button id="save-project" class="btn btn-primary" disabled><i class="fas fa-save"></i> Sauvegarder</button>
+          <button id="export-image" class="btn btn-primary" disabled><i class="fas fa-download"></i> Exporter</button>
+        </div>
+      </div>
+
+      <!-- Panneau de droite: Personnalisation -->
+      <div class="panel right-panel">
+        <section class="section-customization">
+          <h2>3. Personnalisez votre porte</h2>
+          
+          <div class="customization-group" id="colors-group" style="display: none;">
+            <h3>Couleur</h3>
+            <div class="colors-container" id="colors-container">
+              <!-- Les couleurs seront ajoutées ici dynamiquement -->
+            </div>
+          </div>
+          
+          <div class="customization-group" id="handles-group" style="display: none;">
+            <h3>Poignée</h3>
+            <div class="handles-container" id="handles-container">
+              <!-- Les poignées seront ajoutées ici dynamiquement -->
+            </div>
+          </div>
+          
+          <div class="customization-group" id="patterns-group" style="display: none;">
+            <h3>Vitrage / Motif</h3>
+            <div class="patterns-container" id="patterns-container">
+              <!-- Les motifs seront ajoutés ici dynamiquement -->
+            </div>
+          </div>
+        </section>
+        
+        <section class="section-saved-projects">
+          <h2>Projets sauvegardés</h2>
+          <div class="saved-projects" id="saved-projects">
+            <!-- Les projets sauvegardés seront ajoutés ici dynamiquement -->
+            <p class="no-projects">Aucun projet sauvegardé</p>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <!-- Modals -->
+  <div class="modal" id="save-modal">
+    <div class="modal-content">
+      <span class="close-modal">&times;</span>
+      <h2>Sauvegarder votre projet</h2>
+      <div class="form-group">
+        <label for="project-name">Nom du projet:</label>
+        <input type="text" id="project-name" placeholder="Mon projet de porte">
+      </div>
+      <button id="confirm-save" class="btn btn-primary">Sauvegarder</button>
+    </div>
+  </div>
+
+  <!-- Service Worker -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js').then(reg => {
+          console.log('Service Worker enregistré!', reg);
+        }).catch(err => {
+          console.log('Erreur lors de l\'enregistrement du Service Worker:', err);
+        });
+      });
+    }
+  </script>
+
+  <!-- Scripts -->
+  <script src="/js/main.js"></script>
+  <script src="/js/upload.js"></script>
+  <script src="/js/doorCustomizer.js"></script>
+</body>
+</html>
